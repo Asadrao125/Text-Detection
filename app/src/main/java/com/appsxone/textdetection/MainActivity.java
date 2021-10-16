@@ -247,6 +247,9 @@ public class MainActivity extends AppCompatActivity {
                     }
                     tvResult.append(blockText + "\n");
                 }
+                if (text.getText().isEmpty()) {
+                    tvResult.setText("No text detected");
+                }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
