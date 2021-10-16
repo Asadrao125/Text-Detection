@@ -72,7 +72,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:orientation="vertical"
-        android:visibility="visible"
+        android:visibility="gone"
         android:weightSum="2">
 
         <LinearLayout
