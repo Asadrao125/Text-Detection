@@ -2,7 +2,11 @@ package com.appsxone.textdetection;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.Manifest;
 import android.content.Intent;
@@ -13,6 +17,7 @@ import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -24,6 +29,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.navigation.NavigationView;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.text.Text;
 import com.google.mlkit.vision.text.TextRecognition;
@@ -40,10 +46,17 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
-    TextView tvResult;
+    TextView tvResult, tvVersion;
     ImageView image, icCross;
     RelativeLayout imageLayout;
     LinearLayout cameraLayout, galleryLayout, btnLayout;
+
+    DrawerLayout dl;
+    ActionBarDrawerToggle t;
+    RelativeLayout contentFrame;
+    NavigationView navigationView;
+
+    RelativeLayout about, share, rate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +71,55 @@ public class MainActivity extends AppCompatActivity {
         btnLayout = findViewById(R.id.btnLayout);
         icCross = findViewById(R.id.icCross);
         imageLayout = findViewById(R.id.imageLayout);
+        dl = (DrawerLayout) findViewById(R.id.activity_main);
+        contentFrame = findViewById(R.id.contentFrame);
+        navigationView = (NavigationView) findViewById(R.id.nv);
+        about = findViewById(R.id.about);
+        share = findViewById(R.id.share);
+        rate = findViewById(R.id.rate);
+        tvVersion = findViewById(R.id.tvVersion);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        t = new ActionBarDrawerToggle(this, dl, R.string.Open, R.string.Close) {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                super.onDrawerSlide(drawerView, slideOffset);
+                contentFrame.setTranslationX(slideOffset * drawerView.getWidth());
+                dl.bringChildToFront(drawerView);
+                dl.requestLayout();
+            }
+        };
+
+        dl.addDrawerListener(t);
+        t.syncState();
+        t.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white));
+
+        tvVersion.setText("Version: " + BuildConfig.VERSION_NAME);
+
+        about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "About", Toast.LENGTH_SHORT).show();
+                dl.closeDrawers();
+            }
+        });
+
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Share", Toast.LENGTH_SHORT).show();
+                dl.closeDrawers();
+            }
+        });
+
+        rate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Rate", Toast.LENGTH_SHORT).show();
+                dl.closeDrawers();
+            }
+        });
 
         cameraLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +144,22 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(photoPickerIntent, 124);
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (t.onOptionsItemSelected(item))
+            return true;
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!dl.isDrawerOpen(GravityCompat.START)) {
+            super.onBackPressed();
+        } else {
+            dl.closeDrawers();
+        }
     }
 
     private void checkPermission() {
