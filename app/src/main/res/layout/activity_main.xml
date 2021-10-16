@@ -18,7 +18,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:padding="10dp"
-            android:src="@drawable/ic_cross" />
+            android:src="@drawable/ic_cross"
+            app:tint="@color/statusbar" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -71,6 +72,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:orientation="vertical"
+        android:visibility="visible"
         android:weightSum="2">
 
         <LinearLayout

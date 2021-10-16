@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        setTitle("Home");
         image = findViewById(R.id.image);
         cameraLayout = findViewById(R.id.cameraLayout);
         tvResult = findViewById(R.id.tvResult);
