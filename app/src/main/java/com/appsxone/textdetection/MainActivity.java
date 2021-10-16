@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Share", Toast.LENGTH_SHORT).show();
+                shareIntent();
                 dl.closeDrawers();
             }
         });
@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
         rate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Rate", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + getPackageName())));
                 dl.closeDrawers();
             }
         });
@@ -160,6 +160,15 @@ public class MainActivity extends AppCompatActivity {
         } else {
             dl.closeDrawers();
         }
+    }
+
+    public void shareIntent() {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "Let me recommed you Text Detection" +
+                "\nhttps://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID);
+        sendIntent.setType("text/plain");
+        startActivity(sendIntent);
     }
 
     private void checkPermission() {
