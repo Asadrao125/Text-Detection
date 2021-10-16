@@ -46,9 +46,9 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
-    TextView tvResult, tvVersion;
     ImageView image, icCross;
     RelativeLayout imageLayout;
+    TextView tvResult, tvVersion;
     LinearLayout cameraLayout, galleryLayout, btnLayout;
 
     DrawerLayout dl;
