@@ -12,18 +12,21 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.TextDetection">
-        <activity android:name=".MainActivity">
-
-
-            <meta-data
-                android:name="com.google.firebase:firebase-ml-vision.DEPENDENCIES"
-                android:value="ocr" />
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+        <activity android:name=".MainActivity">
+            <meta-data
+                android:name="com.google.firebase:firebase-ml-vision.DEPENDENCIES"
+                android:value="ocr" />
         </activity>
     </application>
 
