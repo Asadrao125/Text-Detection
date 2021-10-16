@@ -50,17 +50,15 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
-    ImageView image, icCross;
-    RelativeLayout imageLayout;
-    TextView tvResult, tvVersion;
-    LinearLayout cameraLayout, galleryLayout, btnLayout;
-
     DrawerLayout dl;
     ActionBarDrawerToggle t;
+    ImageView image, icCross;
+    RelativeLayout imageLayout;
     RelativeLayout contentFrame;
+    TextView tvResult, tvVersion;
     NavigationView navigationView;
-
     RelativeLayout about, share, rate;
+    LinearLayout cameraLayout, galleryLayout, btnLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
